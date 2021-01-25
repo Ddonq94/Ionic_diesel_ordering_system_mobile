@@ -1,0 +1,154 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="background-image: linear-gradient(0deg,  #FE3A3A, #F96E43);">
+    <ion-buttons slot="start" >
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title color="light"> My Orders</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="gp.goto('/login')">
+        <ion-icon name="log-out-outline" style="font-size: 30px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+
+  
+  <div class="featured-banner bg-image" [style.backgroundImage]="'url(assets/img/inv.jpg)'"  style="background-size: 100% 100%; background-repeat: no-repeat;">
+  </div>
+</ion-header>
+
+<ion-content>
+
+  <ion-searchbar (ionInput)="search($event)" style="border-radius: 10%;"></ion-searchbar> 
+  <ion-card   style="border-radius: 12px;" *ngFor="let ord of apiordres;  index as ind" >
+    <ion-item class="loc">
+
+      <ion-grid>
+
+        <ion-row class="thumbnail-list">
+          
+          <ion-col>
+
+            <strong><ion-text style="color: rgb(95, 95, 95);"> Address </ion-text></strong>
+          
+          </ion-col>
+          <ion-col  size="8">
+
+            <ion-text style="color: rgb(95, 95, 95);"> {{gp.capitalize(ord.address)}} </ion-text>
+          
+          </ion-col>
+        
+        </ion-row>
+        <ion-row class="thumbnail-list">
+          
+          <ion-col>
+
+            <strong><ion-text style="color: rgb(95, 95, 95);"> Volume </ion-text></strong>
+          
+          </ion-col>
+          <ion-col  size="8">
+
+            <ion-text style="color: rgb(95, 95, 95);"> {{ord.vol | number}} </ion-text>
+          
+          </ion-col>
+        
+        </ion-row>
+        <div *ngIf="ord.open">
+        <ion-row class="thumbnail-list">
+          
+          <ion-col>
+
+            <strong><ion-text style="color: rgb(95, 95, 95);"> Amount </ion-text></strong>
+          
+          </ion-col>
+          <ion-col  size="8">
+
+            <ion-text style="color: rgb(95, 95, 95);"> &#x20A6;{{ord.amt | number}} </ion-text>
+          
+          </ion-col>
+        
+        </ion-row>
+        <ion-row class="thumbnail-list">
+          
+          <ion-col>
+
+            <strong><ion-text style="color: rgb(95, 95, 95);"> Price </ion-text></strong>
+          
+          </ion-col>
+          <ion-col  size="8">
+
+            <ion-text style="color: rgb(95, 95, 95);"> &#x20A6;{{ord.price | number}} </ion-text>
+          
+          </ion-col>
+        
+        </ion-row>
+        <ion-row class="thumbnail-list">
+          
+          <ion-col>
+
+            <strong><ion-text style="color: rgb(95, 95, 95);"> Location </ion-text></strong>
+          
+          </ion-col>
+          <ion-col  size="8">
+
+            <ion-text style="color: rgb(95, 95, 95);"> {{ord.location}} </ion-text>
+          
+          </ion-col>
+        
+        </ion-row>
+        <ion-row class="thumbnail-list">
+          
+          <ion-col>
+
+            <strong><ion-text style="color: rgb(95, 95, 95);"> Status </ion-text></strong>
+          
+          </ion-col>
+          <ion-col  size="8">
+
+            <ion-text color="danger"> {{ord.status}} </ion-text>
+          
+          </ion-col>
+        
+        </ion-row>
+        <ion-row class="thumbnail-list">
+          
+          <ion-col>
+
+            <strong><ion-text style="color: rgb(95, 95, 95);"> Date </ion-text></strong>
+          
+          </ion-col>
+          <ion-col  size="8">
+
+            <ion-text style="color: rgb(95, 95, 95);"> {{ord.created}} </ion-text>
+          
+          </ion-col>
+        
+        </ion-row>
+      </div>
+      </ion-grid>
+    
+      <ion-icon *ngIf="ord.open" (click)="change(ind)" name="remove-circle-outline" color="warning" slot="end" ></ion-icon>
+      <ion-icon *ngIf="!ord.open" (click)="change(ind)" name="add-circle-outline" color="danger" slot="end" ></ion-icon>
+    
+    
+    </ion-item>
+  </ion-card>
+  
+
+</ion-content>
+
+
+<!-- <ion-footer>
+
+  <ion-toolbar color="light">
+
+    <ion-button color="warning"  expand="block" size="small" (click)="order()">
+      <span class="whiteText"> {{buttonName}}</span>
+    </ion-button>
+  </ion-toolbar>
+
+</ion-footer> -->
+

@@ -1,0 +1,32 @@
+<ion-content fullscreen  scroll-y="false" style="background-image: linear-gradient(0deg, #EC601A, #F8D668);">
+  
+
+  <div class='main ion-text-center'>
+    <img src="assets/img/ashlogo1.png"/>
+    
+    <ion-input [(ngModel)]='fname' class="inputer" name="fname" type="text" placeholder="Full Name" ></ion-input>
+    <ion-input [(ngModel)]='phnum' class="inputer" name="phone" type="text" placeholder="Phone Number"  ></ion-input>
+    <ion-input [(ngModel)]='email' class="inputer" name="email" type="email" placeholder="Email"  ></ion-input>
+    <ion-input [(ngModel)]='vol' class="inputer" name="vol" type="number" placeholder="Quantity"  ></ion-input>
+
+    
+      <ion-select class="inputer" interface="popover" (ionChange)="setLocPrice($event)" placeholder="Select Location">
+
+        <ion-select-option *ngFor="let i of locs;  index as ind" value="{{ind}}">{{gp.capitalize(i.location)}} (&#x20A6;{{i.price | number : '1.2-2'}})</ion-select-option>
+                    
+      </ion-select>
+     
+
+    <ion-input [(ngModel)]='address' class="inputer" name="add" type="text" placeholder="Address"  ></ion-input>
+
+    <ion-button *ngIf="locs" class="btner" (click)='signup()' color="light" shape="round" size="default" type="submit"  style="color: #EC601A;" > <span class="spaner">Signup</span></ion-button>
+
+
+    <ion-button class="btner" fill="outline" (click)='gp.goto("landselect")' color="light" shape="round" size="default" type="submit"   > <span class="">Back</span></ion-button>
+    
+    
+
+    
+  </div>
+
+</ion-content>

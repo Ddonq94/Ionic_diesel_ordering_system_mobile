@@ -1,0 +1,188 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="background-image: linear-gradient(0deg,  #FE3A3A, #F96E43);">
+    <ion-buttons slot="start" >
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title color="light"> Place New Order</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="gp.goto('/login')">
+        <ion-icon name="log-out-outline" style="font-size: 30px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+
+  
+  <div class="featured-banner bg-image" [style.backgroundImage]="'url(assets/img/bdiesel.jpg)'"  style="background-size: 100% 100%; background-repeat: no-repeat;">
+  </div>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid>
+
+    <div class=' ion-text-center' *ngIf="!(prices && locs)">
+      
+      <ion-spinner name="dots"></ion-spinner> 
+      <p style="color: #F96E43;"> <b> Hold On... </b></p>
+    </div>
+
+    <div *ngIf="sets">
+
+      <div  *ngIf="sets.value != 'yes'" class=' ion-text-center' style="color:red">
+        
+        <p>Temporarily unavailable to accept orders at the moment.</p>
+      </div>
+    </div>
+
+    <ion-row class="thumbnail-list" *ngIf="prices">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Prices <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select  [(ngModel)]='price'  value='{{defPrice.price}}' interface="popover">
+            <ion-select-option *ngFor="let j of prices;  index as ind" value="{{j.price}}">{{gp.capitalize(j.location)}} (&#x20A6;{{j.price | number : '1.2-2'}})</ion-select-option>
+                        
+          </ion-select>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+
+    <ion-row class="thumbnail-list" *ngIf="locs">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Location <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select (ionChange)="setLoc($event)" [(ngModel)]='loc' interface="popover">
+            <ion-select-option (click)="gp.goto('location')" value="new">Add New Location</ion-select-option>
+            <ion-select-option *ngFor="let i of locs;  index as ind" value="{{ind}}">{{gp.capitalize((i.Address2.length > 30) ? i.Address2.substring(0, 30)+'...' : i.Address2)}}</ion-select-option>
+                        
+          </ion-select>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+    
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Delivery Est. Datetime <ion-text color="danger">*</ion-text></ion-label>
+          <ion-datetime [(ngModel)]='dt' value="" display-format="YYYY-MM-DD HH:mm" picker-format="YYYY-MM-DD HH:mm"  ></ion-datetime>
+        </ion-item>
+               
+      </ion-col>
+      
+    </ion-row>
+    
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Quantity (Ltrs.) <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="number" [(ngModel)]='vol' ></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+
+
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Payment Option <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select [(ngModel)]='pay' value="transfer" interface="popover">
+            <ion-select-option value="flutterwave">Flutterwave</ion-select-option>
+            <ion-select-option value="transfer">Transfer</ion-select-option>
+                        
+          </ion-select>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+    
+    
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Receiver Name</ion-label>
+          <ion-input type="text" [(ngModel)]='name' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+   
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Receiver Number</ion-label>
+          <ion-input type="text" [(ngModel)]='num' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+   
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Additional Info</ion-label>
+          <ion-input type="text" [(ngModel)]='addinfo' placeholder="e.g Bring a long pipe"   value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+
+
+  
+
+
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Staff Email</ion-label>
+          <ion-input type="email" [(ngModel)]='stemail' placeholder="someone@asharamisynergy.com"  value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+    
+    
+    
+    
+  </ion-grid>
+  <div class="ion-text-center" *ngIf="locs && prices">
+
+      <ion-button color="warning"  shape="round"    (click)="order()">
+        <span class="whiteText"> {{buttonName}}</span>
+      </ion-button>
+  </div>
+
+</ion-content>
+
+
+<!-- <ion-footer *ngIf="locs && prices">
+
+  <ion-toolbar color="light">
+
+    <div class="ion-text-center">
+
+      <ion-button color="warning"  shape="round"    (click)="order()">
+        <span class="whiteText"> {{buttonName}}</span>
+      </ion-button>
+
+    </div>
+
+  </ion-toolbar>
+
+</ion-footer> -->
+

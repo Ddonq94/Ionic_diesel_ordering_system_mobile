@@ -1,0 +1,45 @@
+.featured-banner {
+    height: 10em;
+    position: relative;
+    // border-radius: 0% 0% 45% 45%;
+    // margin-bottom: 16px;
+  
+    .card-caption {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 16px;
+      color: #fff;
+      font-size: 13px;
+    }
+  
+    .banner-title {
+      font-weight: 700;
+      font-size: 17px;
+      display: flex;
+    }
+  }
+
+  ion-thumbnail{
+    --border-radius:15px;
+  }
+
+
+  .thumbnail-list{
+    border-bottom: solid 2px #dddddc;
+  }
+
+  ion-toolbar {
+    --background: url('https://ionicframework.com/docs/demos/api/slides/slide-3.png') no-repeat fixed center; 
+ }
+
+ .whiteText{
+    color: whitesmoke;
+    // margin-bottom: 150px;
+}
+
+
+// .loc {
+    
+//     --background: #dddddc !important;
+//   }

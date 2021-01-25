@@ -1,0 +1,133 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="background-image: linear-gradient(0deg,  #FE3A3A, #F96E43);">
+    <ion-buttons slot="start" >
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title color="light"> Generate Invoice</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="gp.goto('/login')">
+        <ion-icon name="log-out-outline" style="font-size: 30px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+
+  
+  <div class="featured-banner bg-image" [style.backgroundImage]="'url(assets/img/bdiesel.jpg)'"  style="background-size: 100% 100%; background-repeat: no-repeat;">
+  </div>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid>
+
+    <div class=' ion-text-center' *ngIf="!(prices && locs)">
+      
+      <ion-spinner name="dots"></ion-spinner> 
+      <p style="color: #F96E43;"> <b> Hold On... </b></p>
+    </div>
+
+
+    <ion-row class="thumbnail-list" *ngIf="prices">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Prices <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select  [(ngModel)]='price'  value='{{defPrice.price}}' interface="popover">
+            <ion-select-option *ngFor="let j of prices;  index as ind" value="{{j.price}}">{{gp.capitalize(j.location)}} (&#x20A6;{{j.price | number : '1.2-2'}})</ion-select-option>
+                        
+          </ion-select>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+
+
+    <ion-row class="thumbnail-list" *ngIf="locs">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Location <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select (ionChange)="setLoc($event)" [(ngModel)]='loc' interface="popover">
+            <ion-select-option (click)="gp.goto('location')" value="new">Add New Location</ion-select-option>
+            <ion-select-option *ngFor="let i of locs;  index as ind" value="{{ind}}">{{gp.capitalize((i.Address2.length > 30) ? i.Address2.substring(0, 30)+'...' : i.Address2)}}</ion-select-option>
+                        
+          </ion-select>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+    
+    
+    
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Quantity (Ltrs.) <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="number" [(ngModel)]='vol' ></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+    
+    
+
+
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Invoice Type</ion-label>
+          <ion-select [(ngModel)]='inv' interface="popover">
+            <ion-select-option value="PRO FORMA INVOICE">Pro-forma Invoice</ion-select-option>
+            <!-- <ion-select-option value="tf">Transfer</ion-select-option> -->
+                        
+          </ion-select>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+
+
+    
+
+  </ion-grid>
+
+</ion-content>
+
+
+<ion-footer>
+
+  <ion-toolbar color="light">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngIf="locs && prices">
+            <ion-button color="warning" shape="round" expand="block" size="small" (click)="generate()">
+              <span class="whiteText"> Generate</span>
+            </ion-button>
+        </ion-col>
+        <ion-col *ngIf="link">
+          <a href="{{link}}" download="invoice.pdf" style="text-decoration: none;">
+          <ion-button color="danger" shape="round"  expand="block"  size="small" (click)="download()">
+            <span class="whiteText"> Download</span>
+          </ion-button>
+        </a>
+        </ion-col>
+     </ion-row>
+    </ion-grid>
+
+
+
+
+
+    
+  </ion-toolbar>
+
+</ion-footer>
+

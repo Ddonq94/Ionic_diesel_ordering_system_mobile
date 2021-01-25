@@ -1,0 +1,118 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="background-image: linear-gradient(0deg,  #FE3A3A, #F96E43);">
+    <ion-buttons slot="start" >
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title color="light"> My Profile</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="gp.goto('/login')">
+        <ion-icon name="log-out-outline" style="font-size: 30px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+
+  
+  <div class="featured-banner bg-image" [style.backgroundImage]="'url(assets/img/prof.jpg)'"  style="background-size: 100% 100%; background-repeat: no-repeat;">
+  </div>
+</ion-header>
+
+<ion-content>
+
+
+  <div class="ion-text-center">
+    
+    <ion-text color="danger">
+    <h3>Edit Your Details</h3>
+    </ion-text>
+
+  </div>
+
+  <ion-grid>
+
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item >
+          <ion-label color="warning" position="floating">Full Name</ion-label>
+          <ion-input  type="text" [(ngModel)]='name' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+    
+    
+    
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Phone Number </ion-label>
+          <ion-input type="text" [(ngModel)]='phone' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+
+    <div class="ion-text-center breakr">
+      <ion-button color="warning" shape="round"   (click)="save()">
+        <span class="whiteText"> Save</span>
+      </ion-button>
+    </div>
+   
+    <hr>
+
+    <div class="ion-text-center">
+    
+      <ion-text color="danger">
+      <h3>Change Your Password</h3>
+      </ion-text>
+
+    </div>
+    
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Password </ion-label>
+          <ion-input type="password" [(ngModel)]='pass' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+   
+   
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Confirm Password </ion-label>
+          <ion-input type="password" [(ngModel)]='cpass' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+    
+    
+    <div class="ion-text-center">
+      <ion-button color="danger" shape="round"   (click)="savepw()">
+        <span class="whiteText"> Change</span>
+      </ion-button>
+    </div>
+
+  </ion-grid>
+
+</ion-content>
+
+
+<!-- <ion-footer>
+
+  <ion-toolbar color="light">
+    
+  </ion-toolbar>
+
+</ion-footer> -->
+

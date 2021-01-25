@@ -1,0 +1,128 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="background-image: linear-gradient(0deg,  #FE3A3A, #F96E43);">
+    <ion-buttons slot="start" >
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title color="light"> {{mgt}} Location </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="gp.goto('/login')">
+        <ion-icon name="log-out-outline" style="font-size: 30px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-card >
+
+ <ion-grid>
+
+   
+    <ion-row class="thumbnail-list">
+        
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Address <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="text" [(ngModel)]='addy' placeholder="Location Address"   value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+    
+    <ion-row class="thumbnail-list">
+        
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating"> Email <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="email" [(ngModel)]='email' placeholder="someone@something.com"  value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+
+    <ion-row class="thumbnail-list">
+        
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Area<ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="text" [(ngModel)]='area' placeholder="Location Area"   value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+   
+
+    <ion-row class="thumbnail-list" *ngIf="apires">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">City <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select (ionChange)="setCity($event)" [(ngModel)]='city' interface="popover">
+            
+            <ion-select-option *ngFor="let i of apires;  index as ind" value="{{ind}}">{{i.City}}</ion-select-option>
+                        
+          </ion-select>
+        </ion-item>         
+      </ion-col>
+     
+    </ion-row>
+
+
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Staff Email</ion-label>
+          <ion-input type="email" [(ngModel)]='stemail' placeholder="someone@asharamisynergy.com"  value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+
+
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Contact Name <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="text" [(ngModel)]='name' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+   
+    <ion-row class="thumbnail-list">
+      
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Contact Number <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="text" [(ngModel)]='num' value=""></ion-input>
+        </ion-item>         
+      </ion-col>
+      
+    </ion-row>
+
+
+    
+
+
+
+  </ion-grid>
+
+  <div class="ion-text-center" style="margin-bottom: 15px;">
+    <ion-button class="btner" (click)='submit()'  color="warning" shape="round"   > 
+      <span class="whiteText">  Submit </span>
+    </ion-button>
+
+
+  </div>
+
+  </ion-card>
+
+</ion-content>
