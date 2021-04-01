@@ -90,12 +90,14 @@ export class PaymentPage implements OnInit {
     },
     err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       // this.gp.loading.dismiss();
 
 
     })
     .catch(err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       console.log('err');
       // this.gp.loading.dismiss();
 

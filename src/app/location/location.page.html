@@ -26,6 +26,10 @@
 <ion-content>
 
   <ion-searchbar (ionInput)="search($event)" style="border-radius: 10%;"></ion-searchbar> 
+
+  <div class='ion-text-center' style="margin-top: 30px;" color='medium' *ngIf='(apilocres && apilocres.length == 0)'> Nothing here currently, As you were</div>
+
+
   <ion-card   style="border-radius: 12px;" *ngFor="let loc of apilocres;  index as ind" >
     <ion-item class="loc">
 

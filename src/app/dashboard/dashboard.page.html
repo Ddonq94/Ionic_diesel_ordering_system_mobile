@@ -4,7 +4,7 @@
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     
-    <ion-title color="light"> Hello, {{gp.capitalize(gp.currentUser['CUSTOMER_NAME'])}}</ion-title>
+    <ion-title color="light"> Welcome Back!</ion-title>
 
     <ion-buttons slot="end">
       <ion-button color="light" (click)="gp.goto('/login')">
@@ -16,46 +16,241 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="false">
+<ion-content [fullscreen]="false" class="card-background-page">
 
-  <ion-card   style="border-radius: 12px;" (click)="gp.goto('order')">
+  
+  <ion-item lines="none" style="margin-top: 15px;">
+    <ion-thumbnail (click)="gp.goto('profile')" slot="end">
+      <img src="assets/img/redprof.png">
+    </ion-thumbnail>
+    <ion-label>
+      <h1>
+        <ion-text color="danger">
+          <b>Hey {{gp.capitalize(gp.currentUser['CUSTOMER_NAME'])}}!</b>
+        </ion-text>
+      </h1>
+      
+    </ion-label>
+  </ion-item>
+
+
+  <ion-card *ngIf="apiordres && apiordres.length > 0">
+    <ion-card-header>
+      <ion-text color="danger" >
+        Buying Trends
+      </ion-text>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas ></canvas>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <ion-item lines="none" style="margin-top: 15px;">
+    
+    <ion-label>
+      
+      <h3 style="margin-top:15px;">
+        <ion-text color="danger">
+          <strong> Quick Access</strong>
+        </ion-text>
+      </h3>
+    </ion-label>
+  </ion-item>
+
+
+
+
+  <ion-slides [options]="sliderConfig" >
+
+    <ion-slide >
+  
+      <ion-card  class="order" style="height: 100px; width: 150px; border-radius: 12px;" (click)="gp.goto('order')">
+          <ion-icon class="card-title center"   name="cart"></ion-icon>
+
+          <div class="card-subtitle" > Place New Order </div>
+      </ion-card>
+  
+    </ion-slide>
+
+    <ion-slide >
+      <ion-card  class="inv" style="height: 100px; width: 150px; border-radius: 12px;" (click)="gp.goto('invoice')">
+        
+        <ion-icon class="card-title center" name="newspaper"  ></ion-icon>
+        
+        <div class="card-subtitle" > Generate Invoice </div>
+
+      </ion-card>
+
+    </ion-slide>
+
+
+    <ion-slide >
+    
+      <ion-card  class="pay" style="height: 100px; width: 150px; border-radius: 12px;" (click)="gp.goto('location')">
+          
+        <ion-icon class="card-title center" name="location-outline"   ></ion-icon>
+        
+        <div class="card-subtitle" > My Locations </div>
+      
+      </ion-card>
+
+    </ion-slide>
+    
+    
+   
+
+
+  </ion-slides>
+
+
+
+  <ion-item lines="none" style="margin-top: 15px;" >
+
+    <ion-label>
+      
+      <h2>
+        <ion-text color="danger">
+          <strong> Your Details </strong> 
+        </ion-text>
+        
+      </h2>
+
+    </ion-label>
+
+  </ion-item>
+
+
+  <ion-slides [options]="sliderConfig" >
+
+    <ion-slide >
+  
+      <ion-card class="porder"  style="height: 100px; width: 150px; border-radius: 12px;" (click)="gp.goto('porder')">
+          
+        <ion-icon class="card-title center" name="time-outline"  ></ion-icon>
+        <div class="card-subtitle" > My Past Orders </div>
+        
+
+      </ion-card>
+
+
+       
+  
+    </ion-slide>
+    
+    <ion-slide >
+  
+      <ion-card  class="pay" style="height: 100px; width: 150px; border-radius: 12px;" (click)="gp.goto('payment')">
+       
+        <ion-icon class="card-title center" name="wallet-outline"  ></ion-icon>
+       
+        <div class="card-subtitle" > My Payments </div>
+      </ion-card>
+  
+    </ion-slide>
+
+
+    <ion-slide>
+
+      <ion-card class="prof"  style="height: 100px; width: 150px; border-radius: 12px;" (click)="gp.goto('profile')">
+        
+        <ion-icon class="card-title center" name="person-outline"  ></ion-icon>
+        
+        <div class="card-subtitle" > My Profile </div>
+
+      </ion-card>  
+
+    </ion-slide>
+
+  </ion-slides>
+
+
+  <ion-item lines="none" style="margin-top: 20px;" >
+
+    <ion-label>
+      
+      <h2>
+        <ion-text color="danger">
+          <strong> More... </strong> 
+        </ion-text>
+        
+      </h2>
+
+    </ion-label>
+  </ion-item>
+  
+  <!-- <ion-item style="margin-top: 5px; border-bottom: 1px solid #dddddc; margin-bottom: 10px;" >
+
+    <ion-label>
+      
+      <h2>
+        <ion-text color="medium">
+          <a href="https://www.youtube.com/playlist?list=PL_co3QCMPQCPTb8yyMrC_yyBfZM1cGuTw" style="text-decoration: none;" target="_blank"><ion-icon color="medium" name="alert-circle-outline"></ion-icon> User Guide </a>
+        </ion-text>
+        
+      </h2>
+
+    </ion-label>
+  </ion-item> -->
+
+<ion-slides [options]="sliderConfig" > 
+  <ion-slide >
+  
+    <a href="https://www.youtube.com/playlist?list=PL_co3QCMPQCPTb8yyMrC_yyBfZM1cGuTw" style="text-decoration: none;" target="_blank">
+      <ion-card  class="order" style="height: 100px; width: 120px; border-radius: 12px;" >
+      
+        <ion-icon class="card-title center" name="alert-circle-outline"  ></ion-icon>
+      
+        <div class="card-subtitle" > User Guide </div>
+      </ion-card>
+    </a>
+
+  </ion-slide>
+
+</ion-slides>
+
+  <!-- <ion-card   style="border-radius: 12px;" (click)="gp.goto('order')">
     <ion-item class="order">
       <h2 style="color: whitesmoke;"> Place New Order </h2>
       <ion-icon  name="cart" color="light" slot="end" style="font-size: 55px; transform: rotate(20deg); opacity: 0.3; margin-left: -20px;"></ion-icon>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card   style="border-radius: 12px;" (click)="gp.goto('invoice')">
+  <!-- <ion-card   style="border-radius: 12px;" (click)="gp.goto('invoice')">
     <ion-item class="inv">
       <h2 style="color: whitesmoke;text-align: right;margin-left: 25vw;"> Generate Invoice </h2>
       <ion-icon  name="newspaper" color="light" slot="start" style="font-size: 55px; transform: rotate(10deg); opacity: 0.3; margin-right: -10px;"></ion-icon>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card   style="border-radius: 12px;" (click)="gp.goto('location')">
+  <!-- <ion-card   style="border-radius: 12px;" (click)="gp.goto('location')">
     <ion-item class="loc">
       <h2 style="color: whitesmoke;"> My Locations </h2>
       <ion-icon  name="location-outline" color="light" slot="end" style="font-size: 55px;  opacity: 0.3;"></ion-icon>
     </ion-item>
-  </ion-card>
-  <ion-card   style="border-radius: 12px;" (click)="gp.goto('porder')">
+  </ion-card> -->
+
+  <!-- <ion-card   style="border-radius: 12px;" (click)="gp.goto('porder')">
     <ion-item class="porder">
       <h2 style="color: whitesmoke;text-align: right;margin-left: 25vw;"> My Past Orders </h2>
       <ion-icon  name="time-outline" color="light" slot="start" style="font-size: 55px;  opacity: 0.3;margin-right: -10px;"></ion-icon>
     </ion-item>
-  </ion-card>
-  <ion-card   style="border-radius: 12px;" (click)="gp.goto('payment')">
+  </ion-card> -->
+
+  <!-- <ion-card   style="border-radius: 12px;" (click)="gp.goto('payment')">
     <ion-item class="pay">
       <h2 style="color: whitesmoke;"> My Payments </h2>
       <ion-icon  name="wallet-outline" color="light" slot="end" style="font-size: 55px; transform: rotate(20deg); opacity: 0.3;"></ion-icon>
     </ion-item>
-  </ion-card>
-  <ion-card   style="border-radius: 12px;" (click)="gp.goto('profile')">
+  </ion-card> -->
+  
+  <!-- <ion-card   style="border-radius: 12px;" (click)="gp.goto('profile')">
     <ion-item class="prof">
       <h2 style="color: whitesmoke;text-align: right;margin-left: 25vw;"> My Profile </h2>
       <ion-icon  name="person-outline" color="light" slot="start" style="font-size: 55px;  opacity: 0.3;"></ion-icon>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
   
 </ion-content>
  

@@ -13,6 +13,16 @@ export class LandPage implements OnInit {
 
   ) { }
 
+  ionViewWillEnter() {
+    setTimeout(()=>{
+      this.gp.goto('/landselect');
+
+
+      
+    },5000);
+  }
+  
+  
   ngOnInit() {
     setTimeout(()=>{
       this.gp.goto('/landselect');

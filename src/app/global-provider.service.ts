@@ -65,6 +65,11 @@ export class GlobalProviderService {
   };
 
 
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
   head(){
     
     return this.httpOptions;

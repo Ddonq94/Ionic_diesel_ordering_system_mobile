@@ -81,12 +81,14 @@ export class OrderPage implements OnInit {
     },
     err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       // this.gp.loading.dismiss();
 
 
     })
     .catch(err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       console.log('err');
       // this.gp.loading.dismiss();
 
@@ -164,6 +166,119 @@ export class OrderPage implements OnInit {
       }
 
 
+      payOptions:any;
+
+      apiordres:any
+
+      getPays(){
+
+        let bod = {}
+  
+    
+        this.gp.posty('payoptions_ajax', bod).then(res => {
+          console.log('allof payopts', res);
+          
+          this.payOptions = res;
+          
+  
+          this.gp.loading.dismiss();
+ 
+          
+    
+        },
+        err => {
+          console.log(err);
+      alert("Something went wrong, Please contact Admin");
+          // this.gp.loading.dismiss();
+    
+    
+        })
+        .catch(err => {
+          console.log(err);
+      alert("Something went wrong, Please contact Admin");
+          console.log('err');
+          // this.gp.loading.dismiss();
+    
+    
+        });
+    
+    
+      }
+
+
+
+      getOrds(){
+
+        let bod = {
+          name: this.gp.currentUser['name'],
+          email: this.gp.currentUser['email'],
+          count: 1
+        }
+    
+    
+        this.gp.posty('lastcustOrder_ajax', bod).then(res => {
+          console.log('allof ords', res);
+          
+          this.apiordres = res;
+          
+          this.apiordres.map(l => l.amt = parseInt(l.price) * parseInt(l.vol) );
+    
+          console.log(this.apiordres);
+
+          let ord = this.apiordres
+
+          let lastord
+
+          if(ord.length == 1 ){
+
+            // console.log(locs);
+            lastord = ord[0];
+            
+            let ordloc = this.locs.filter(l => l.Address2 == lastord['address'])[0]['LiD'];
+            
+            console.log(lastord);
+            
+            this.locObj = this.locs.filter(l => l.LiD == ordloc)[0];
+           this.vol = parseInt(lastord['vol']);
+            this.name = (lastord['recName']);
+            this.num = (lastord['recPhone']);
+            this.pay = (lastord['payMedium']);
+           this.addinfo = (lastord['addInfo']);
+            this.stemail = (lastord['staffEmail']);
+            
+            
+            }
+            else{
+              
+            alert("No existing orders on record, Pls Proceed");
+            
+            }
+
+
+          
+          this.gp.loading.dismiss();
+    
+          
+    
+        },
+        err => {
+          console.log(err);
+      alert("Something went wrong, Please contact Admin");
+          // this.gp.loading.dismiss();
+    
+    
+        })
+        .catch(err => {
+          console.log(err);
+      alert("Something went wrong, Please contact Admin");
+          console.log('err');
+          // this.gp.loading.dismiss();
+    
+    
+        });
+    
+    
+      }
 
 
 
@@ -309,12 +424,15 @@ export class OrderPage implements OnInit {
     },
     err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
+      // alert("Something went wrong, Please contact Admin");
       // this.gp.loading.dismiss();
 
 
     })
     .catch(err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       console.log('err');
       // this.gp.loading.dismiss();
 
@@ -371,12 +489,14 @@ locObj: any;
     },
     err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       // this.gp.loading.dismiss();
 
 
     })
     .catch(err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       console.log('err');
       // this.gp.loading.dismiss();
 
@@ -415,12 +535,14 @@ locObj: any;
     },
     err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       // this.gp.loading.dismiss();
 
 
     })
     .catch(err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       console.log('err');
       // this.gp.loading.dismiss();
 
@@ -462,12 +584,14 @@ locObj: any;
     },
     err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       // this.gp.loading.dismiss();
 
 
     })
     .catch(err => {
       console.log(err);
+      alert("Something went wrong, Please contact Admin");
       console.log('err');
       // this.gp.loading.dismiss();
 
@@ -483,6 +607,9 @@ locObj: any;
     this.getSets();
     this.getPrice();
     this.getLocs();
+    this.getPays();
+
+    this.dt = this.mo().add(1,'days').format('YYYY-MM-DD HH:mm')
 
   }
 

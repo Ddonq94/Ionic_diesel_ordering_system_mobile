@@ -7,20 +7,28 @@
     <ion-title color="light"> Place New Order</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button color="light" (click)="gp.goto('/login')">
-        <ion-icon name="log-out-outline" style="font-size: 30px;"></ion-icon>
-      </ion-button>
+      <ion-buttons color="light" (click)="gp.goto('/login')">
+        <ion-icon color="light" class="whiteText" name="log-out-outline" style="font-size: 30px;"></ion-icon>
+      </ion-buttons>
     </ion-buttons>
-
-
+    
+    
   </ion-toolbar>
-
+  
   
   <div class="featured-banner bg-image" [style.backgroundImage]="'url(assets/img/bdiesel.jpg)'"  style="background-size: 100% 100%; background-repeat: no-repeat;">
+    <ion-button size="small" color="danger" (click)="getOrds()" *ngIf="locs" style="position: relative; left: 48vw; top: 30vw;">
+      <ion-icon color="light" name="color-wand-outline"></ion-icon>
+    
+      Load From Last Order
+    </ion-button>
+    
   </div>
 </ion-header>
 
 <ion-content>
+
+  <div style="padding:15px">
 
 
   <ion-grid>
@@ -98,8 +106,10 @@
         <ion-item>
           <ion-label position="floating">Payment Option <ion-text color="danger">*</ion-text></ion-label>
           <ion-select [(ngModel)]='pay' value="transfer" interface="popover">
-            <ion-select-option value="flutterwave">Flutterwave</ion-select-option>
-            <ion-select-option value="transfer">Transfer</ion-select-option>
+            <!-- <ion-select-option value="flutterwave">Flutterwave</ion-select-option>
+            <ion-select-option value="transfer">Transfer</ion-select-option> -->
+            <ion-select-option *ngFor="let p of payOptions;  index as id" value="{{p.payoption}}">{{gp.capitalize(p.payoption)}}</ion-select-option>
+
                         
           </ion-select>
         </ion-item>         
@@ -166,6 +176,9 @@
         <span class="whiteText"> {{buttonName}}</span>
       </ion-button>
   </div>
+
+</div>
+
 
 </ion-content>
 

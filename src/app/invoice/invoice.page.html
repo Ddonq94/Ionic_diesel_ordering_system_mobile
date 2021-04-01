@@ -22,6 +22,8 @@
 
 <ion-content>
 
+  <div style="padding:15px">
+
 
   <ion-grid>
 
@@ -95,13 +97,32 @@
 
 
     
-
+<!-- 
   </ion-grid>
+
+  <ion-grid> -->
+    <ion-row>
+      <ion-col *ngIf="locs && prices">
+          <ion-button color="warning" shape="round" expand="block" size="small" (click)="generate()">
+            <span class="whiteText"> Generate</span>
+          </ion-button>
+      </ion-col>
+      <ion-col *ngIf="link">
+        <a href="{{link}}" download="invoice.pdf" style="text-decoration: none;">
+        <ion-button color="danger" shape="round"  expand="block"  size="small" (click)="download()">
+          <span class="whiteText"> Download</span>
+        </ion-button>
+      </a>
+      </ion-col>
+   </ion-row>
+  </ion-grid>
+
+  </div>
 
 </ion-content>
 
 
-<ion-footer>
+<!-- <ion-footer>
 
   <ion-toolbar color="light">
 
@@ -129,5 +150,5 @@
     
   </ion-toolbar>
 
-</ion-footer>
+</ion-footer> -->
 
